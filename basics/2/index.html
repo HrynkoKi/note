@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@next"></script>
+  <title>#2 Vue Objects</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <h1>{{ priority.title }}</h1>
+      <span>{{ priority.value }}</span>
+    </div>
+    <br>
+    <div>
+      <button v-for="(button, index) in buttons" :key="button.title">{{ button.title }}</button>
+    </div>
+  </div>
+</body>
+
+<script>
+  const App = {
+      data() {
+        return {
+          priority: {
+            title: 'Priority',
+            value: 0
+          },
+          // Более структурный подход для хранения данных
+          buttons: [
+            {
+              title: 'Down',
+              classes: '',
+              icon: ''
+            },
+            {
+              title: 'Up',
+              classes: '',
+              icon: ''
+            }
+          ]
+        }
+      }
+  };
+
+  Vue.createApp(App).mount('#app');
+</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@next"></script>
+  <title>#7 V-model</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <input type="text" v-model="title">
+    </div>
+    <div>
+      <img @click="changeImg" :src="imgUrl" :title="title">
+    </div>
+  </div>
+</body>
+
+<script>
+  const getRandomValue = (array) => {
+    return Math.floor(Math.random() * array);
+  };
+
+  const App = {
+      data() {
+        return {
+          imgUrl: 'http://tocode.ru/static/uploads/courses/3/91873ad.jpg',
+          title: ''
+        }
+      },
+      methods: {
+        changeImg() {
+          const images = [
+            'http://tocode.ru/static/uploads/courses/3/91873ad.jpg',
+            'http://tocode.ru/static/uploads/courses/3/816464ha.jpg'
+          ];
+
+          this.imgUrl = images[getRandomValue(images.length)];
+        }
+      }
+  };
+
+  Vue.createApp(App).mount('#app');
+</script>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@next"></script>
+  <title>#4 Vue Conditions</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <h1>{{ priority.title }}</h1>
+      <span>{{ priority.value }}</span>
+    </div>
+    <br>
+    <div>
+      <button v-if="this.priority.value !== 0" @click="down">{{ buttons.prev.title }}</button>
+      <button @click="up">{{ buttons.next.title }}</button>
+    </div>
+  </div>
+</body>
+
+<script>
+  const App = {
+      data() {
+        return {
+          priority: {
+            title: 'Priority',
+            value: 0
+          },
+          // Более структурный подход для хранения данных
+          buttons: {
+            prev: {
+              title: 'Down',
+              classes: '',
+              icon: '',
+              isDisable: false
+            },
+            next: {
+              title: 'Up',
+              classes: '',
+              icon: '',
+              isDisable: false
+            }
+          }
+        }
+      },
+      methods: {
+        down() {
+          if (this.priority.value >= 1) {
+            this.priority.value--;
+          }
+        },
+        up() {
+          if (this.priority.value < 3) {
+            this.priority.value++;
+          }
+        }
+      }
+  };
+
+  Vue.createApp(App).mount('#app');
+</script>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@next"></script>
+  <title>#5 Vue Computed</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <h1>{{ priority.title }}</h1>
+      <span>{{ priority.value }}</span>
+    </div>
+    <br>
+    <div>
+      <button v-if="showDown" @click="down">{{ buttons.prev.title }}</button>
+      <button @click="up">{{ buttons.next.title }}</button>
+    </div>
+    <div>
+      <p>{{ showMessage }}</p>
+    </div>
+  </div>
+</body>
+
+<script>
+  const App = {
+      data() {
+        return {
+          priority: {
+            title: 'Priority',
+            value: 0
+          },
+          // Более структурный подход для хранения данных
+          buttons: {
+            prev: {
+              title: 'Down',
+              classes: '',
+              icon: '',
+              isDisable: false
+            },
+            next: {
+              title: 'Up',
+              classes: '',
+              icon: '',
+              isDisable: false
+            }
+          }
+        }
+      },
+      computed: {
+        showDown() {
+          return this.priority.value !== 0;
+        },
+        showMessage() {
+          const messages = {
+            welcome: 'Make some Vote',
+            save: 'Saved',
+          };
+
+          return this.priority.value > 0 ? messages.save : messages.welcome;
+        }
+      },
+      methods: {
+        down() {
+          if (this.priority.value >= 1) {
+            this.priority.value--;
+          }
+        },
+        up() {
+          if (this.priority.value < 3) {
+            this.priority.value++;
+          }
+        }
+      }
+  };
+
+  Vue.createApp(App).mount('#app');
+</script>
+</html>

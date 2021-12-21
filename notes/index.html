@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- vue app start -->
+    <div id="app">
+      <h1>Notes</h1>
+      <form @submit.prevent="onSubmit">
+        <input
+          type="text"
+          v-model.trim="input.value"
+          :placeholder="input.placeholder"
+          required
+        >
+        <button type="submit">Add new note</button>
+      </form>
+      <br>
+      <div class="notes">
+        <div
+          class="note"
+          v-for="(note, index) in notes"
+          :key="note.id"
+        >
+          <p v-if="!note.edit">
+            <span @click="remove(index)">&#10005;</span>
+            <span @click="editText(note.id)">{{ note.desc }}</span>
+          </p>
+          <form
+            v-else
+            @submit.prevent="editText(note.id)"
+            @keydown.enter
+          >
+            <input
+              type="text"
+              v-model.trim="note.desc"
+            >
+            <button type="submit">Edit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- vue app end -->
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

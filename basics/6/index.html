@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@next"></script>
+  <title>#6 Vue Bind</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <img @click="changeImg" :src="imgUrl">
+    </div>
+  </div>
+</body>
+
+<script>
+  const getRandomValue = (array) => {
+    return Math.floor(Math.random() * array);
+  };
+
+  const App = {
+      data() {
+        return {
+          imgUrl: 'http://tocode.ru/static/uploads/courses/3/91873ad.jpg'
+        }
+      },
+      methods: {
+        changeImg() {
+          const images = [
+            'http://tocode.ru/static/uploads/courses/3/91873ad.jpg',
+            'http://tocode.ru/static/uploads/courses/3/816464ha.jpg'
+          ];
+
+          this.imgUrl = images[getRandomValue(images.length)];
+        }
+      }
+  };
+
+  Vue.createApp(App).mount('#app');
+</script>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@next"></script>
+  <title>#8 Vue v-for</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <ul>
+        <li v-for="(person, idnex) in people" :key="person.id">{{ person.name }} || {{ person.age }}</li>
+      </ul>
+    </div>
+    <div>
+      <form @submit.prevent>
+        <label for="name"></label>
+        <input id="name"type="text" v-model="namePerson">
+        <label for="age"></label>
+        <input id="age" type="text" v-model="agePerson">
+        <button @click="addPerson" type="submit">Add new person</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+<script>
+  const App = {
+      data() {
+        return {
+          people: [
+            {
+              id: 1,
+              name: 'Tom',
+              age: 27
+            },
+            {
+              id: 2,
+              name: 'Kir',
+              age: 19
+            },
+            {
+              id: 3,
+              name: 'Christy',
+              age: 24
+            },
+            {
+              id: 4,
+              name: 'Lizzy',
+              age: 23
+            }
+          ],
+          namePerson: '',
+          agePerson: null
+        }
+      },
+      methods: {
+        addPerson() {
+          if (this.namePerson && this.addPerson) {
+            this.people.push({
+              id: this.people.length + 1,
+              name: this.namePerson,
+              age: this.agePerson
+            });
+          }
+
+          // Reset inputs
+          this.namePerson = '';
+          this.agePerson = null;
+        }
+      }
+  };
+
+  Vue.createApp(App).mount('#app');
+</script>
+</html>
